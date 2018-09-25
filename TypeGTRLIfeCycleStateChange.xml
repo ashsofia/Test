@@ -1,0 +1,105 @@
+<?xml version="1.0" standalone="yes"?>
+<%@page language="java" access="internal|http"%>
+<%@taglib uri="http://www.ptc.com/infoengine/taglib/core" prefix="ie"%>
+<%@page import="com.infoengine.object.factory.Att"
+import="wt.adapter.BasicWebjectDelegate"
+import="wt.fc.ObjectReference"
+import="java.rmi.RemoteException"
+import="wt.pom.Transaction"        
+import="wt.fc.PersistenceHelper"
+import="wt.fc.PersistenceServerHelper"    
+import="wt.util.WTMessage"    
+import="wt.fc.QueryResult"
+import="wt.query.QuerySpec"
+import="wt.query.SearchCondition"
+import="java.io.IOException"
+import ="java.lang.reflect.InvocationTargetException"
+import="wt.doc.WTDocument"
+import="wt.fc.Persistable"
+import="wt.fc.PersistenceHelper"
+import="wt.fc.QueryResult"
+import="wt.lifecycle.LifeCycleHelper"
+import="wt.lifecycle.State"
+import="wt.pds.StatementSpec"
+import="wt.util.WTException"
+import="wt.util.WTPropertyVetoException"
+         
+%>
+
+<!DOCTYPE PROCESS>
+<PROCESS NAME="TypeGTRLifeCycleStateChange">  
+  
+  <%
+               
+              // String codetypegtr="JU77-00";
+              String codetypegtr=null;
+              // String lifecyclestate="RELEASED";
+               String lifecyclestate=null;
+               QueryResult qrObject = null;
+                 try
+               { 
+                 codetypegtr = (String)getParam("codetypegtr");
+		 lifecyclestate = (String)getParam("lifecyclestate");
+		System.out.println("In WTDocument Class");	
+		QuerySpec qs = new QuerySpec(WTDocument.class);
+		qs.appendWhere(new SearchCondition(WTDocument.class, WTDocument.K1_CODE_TYPE_GTR , SearchCondition.EQUAL, codetypegtr), new int[]{0});
+		QueryResult qr = PersistenceHelper.manager.find((StatementSpec)qs);
+		System.out.println(qr.size());
+		if(qr.size()==0)
+		{
+			System.out.println("There is no TypeGTR by the name " +codetypegtr);
+		}
+		while (qr.hasMoreElements())
+		{
+		    WTDocument doc = (WTDocument)qr.nextElement();
+		    String oidTypeGTR=  wt.fc.ObjectReference.newObjectReference(doc).toString();
+		    long longOidMaster = Long.valueOf(oidTypeGTR.substring(oidTypeGTR.lastIndexOf(":") + 1, oidTypeGTR.length())).longValue();
+		    //System.out.println("oidTypegTR" +oidTypeGTR);
+		   // System.out.println("oidWTDocument" +longOidMaster );
+		    QuerySpec queryspec = new QuerySpec();
+		    
+		    queryspec.appendClassList(TypeGTR.class, true);
+			SearchCondition c1 = new SearchCondition(TypeGTR.class, "masterReference.key.id", SearchCondition.EQUAL, longOidMaster);
+			queryspec.appendWhere(c1, new int[] {0});
+			SearchCondition c2 = new SearchCondition(TypeGTR.class, "k1LatestVersion", SearchCondition.IS_TRUE);
+			queryspec.appendAnd();
+			queryspec.appendWhere(c2, new int[] {0});
+			qrObject = PersistenceHelper.manager.find(queryspec);
+             while (qrObject.hasMoreElements())
+             {
+            	 Persistable aPersistable[] = (Persistable[]) qrObject.nextElement();   
+            	 TypeGTR typegt = (TypeGTR)aPersistable[0];
+            	 System.out.println("CodeTypeGTR Object Retrieved");
+            	 System.out.println("Typegtr Object Lifecyclestate Before the Change" +typegt.getLifeCycleState() );
+            	 System.out.println("LifeCycleStateChange in progress........");
+            	 try{
+            	 LifeCycleHelper.service.setLifeCycleState(typegt,State.toState(lifecyclestate),true);
+                 typegt = (TypeGTR) PersistenceHelper.manager.refresh(typegt);
+            	 }catch(Exception e)
+            	 {
+            	  System.out.println("There is a problem while changing  the lifecycle State .Please verify the name of lifecycle state" +e );
+            	 }
+            	 System.out.println("Typegtr object Lifecyclestate After the Change" +typegt.getLifeCycleState() );
+            	 
+             }
+			 
+		}
+
+               }catch (Exception exp) 
+                  {
+                   System.out.println("Exception " +exp);
+                   }
+		
+Group groupOut = new Group();
+Element e      = new Element();
+
+addGroup(groupOut);
+
+ %> 
+
+<ie:webject name="Create-Group" type="GRP">
+<ie:param name="ELEMENT" data="MESSAGE=Hello $(@SERVER[]auth-user[]) TypeGTR ObjectLIfecycle state CHANGE is in progress .Please check the Method server logs for completion  " default="TYPEGTR OBJECT LIFECYCLE STATE CHANGE TASK"/>
+<ie:param name="GROUP_OUT"  data="groupout"/>
+</ie:webject>
+
+</PROCESS>
