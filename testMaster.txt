@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 local repo merge test
 In local repo
+=======
+remote repo merge test
+In remote repo
+>>>>>>> f52adbcfb5e2d0ee6b7e26a107844560be4853bb
