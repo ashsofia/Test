@@ -1,0 +1,2 @@
+local repo merge test
+In local repo
