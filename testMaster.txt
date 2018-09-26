@@ -4,5 +4,8 @@ In local repo
 
 remote repo merge test
 In remote repo
+<<<<<<< HEAD
 
 second test in local
+=======
+>>>>>>> commit
