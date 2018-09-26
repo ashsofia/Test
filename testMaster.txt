@@ -1,0 +1,2 @@
+remote repo merge test
+In remote repo
