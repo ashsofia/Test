@@ -5,4 +5,9 @@ In local repo
 remote repo merge test
 In remote repo
 
+<<<<<<< HEAD
 second test in local
+=======
+
+second test in remote
+>>>>>>> 55673d1e7514a2d373059c94b665268bc8ee87e7
