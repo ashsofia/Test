@@ -5,7 +5,13 @@ In local repo
 remote repo merge test
 In remote repo
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 second test in local
 =======
 >>>>>>> commit
+=======
+
+
+second test in remote
+>>>>>>> Update testMaster.txt
