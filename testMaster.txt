@@ -13,5 +13,14 @@ second test in local
 =======
 
 
+<<<<<<< HEAD
 second test in remote
 >>>>>>> Update testMaster.txt
+=======
+<<<<<<< HEAD
+second test in local
+=======
+
+second test in remote
+>>>>>>> 55673d1e7514a2d373059c94b665268bc8ee87e7
+>>>>>>> e67f406e401ccd5d8bbcb633a55ab5c478aada97
