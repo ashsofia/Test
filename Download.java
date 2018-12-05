@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0.0
  * @since 10-JUL-2018
  */
-public class Download extends HttpServlet {
+public class download extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
