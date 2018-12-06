@@ -2,11 +2,11 @@
 <project name="PLM-LHT" default="compile" basedir="..">
     
     <target name="init">
-       <mkdir dir="classes" />
+       <mkdir dir="test/classes" />
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="src" destdir="classes" />
+        <javac srcdir="test/src" destdir="test/classes" />
     </target>
     
  
