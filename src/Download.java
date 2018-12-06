@@ -23,7 +23,7 @@ public class download extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter()
+		PrintWriter out = response.getWriter();
 		String filename = "";
 		String type = (String) request.getParameter("type");
 		if (type.equals("search")) {
@@ -47,3 +47,4 @@ public class download extends HttpServlet {
 	}
 
 
+}
