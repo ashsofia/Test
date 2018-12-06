@@ -2,11 +2,11 @@
 <project name="PLM-LHT" default="compile" basedir="..">
     
     <target name="init">
-       <mkdir dir="test/classes" />
+       <mkdir dir="SonarQube/classes" />
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="test/src" destdir="test/classes" />
+        <javac srcdir="SonarQube/src" destdir="SonarQube/classes" />
     </target>
     
  
