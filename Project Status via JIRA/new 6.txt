@@ -1,0 +1,93 @@
+Ext.namespace('SDM.search');
+
+SDM.search.controlSavedQueryAccess = function() {
+                SDM.search.canManageSavedQueries();                
+};
+
+SDM.search.disableActionsForUser = function() {
+                
+	var cmp = Ext.getCmp('navigatorTabPanel');
+	if(cmp == null) {
+				   return;
+	}
+	
+	var savedSearchTD = document.getElementById("object_search_navigation__historySavedNavigation");
+	 
+	 savedSearchTD.onclick = function(){
+		 SDM.search.hideSearchElement();
+	 }
+	 
+	 var advancedSearchNav = document.getElementById("object_search_navigation__advancedNavigation");
+	 
+	 advancedSearchNav.onclick = function(){
+		 SDM.search.hideSaveThisSearchElement();
+	 }
+	
+		   
+	var searchTabCmp = cmp.getComponent("object_search_navigation");
+				
+	var historysaved = searchTabCmp.getComponent("historySavedNavigation");
+	
+	historysaved.on('afterlayout', function() {
+			 SDM.search.hideSearchElement();
+		}
+	);
+	
+	var advancedSearchNav = searchTabCmp.getComponent("advancedNavigation");
+	
+	advancedSearchNav.on('afterlayout', function() {
+			 SDM.search.hideSaveThisSearchElement();
+		}
+	);
+			
+};
+
+SDM.search.hideSearchElement = function(){
+  var SavedSearchTD = document.getElementById("SavedSearchTD");
+  if(SavedSearchTD != null) {
+	var searchImage = SavedSearchTD.querySelectorAll("img");     
+	for(var i=0; i < searchImage.length; i++){
+		   searchImage[i].parentNode.parentNode.remove();
+	}
+  }else {
+    setTimeout(SDM.search.hideSearchElement, 15);
+  }
+}
+
+SDM.search.hideSaveThisSearchElement = function(){
+  var saveThisSearchLinkElement = document.getElementById("saveThisSearchLink");
+  if(saveThisSearchLinkElement != null) {
+	  saveThisSearchLinkElement.remove();
+  }else {
+    setTimeout(SDM.search.hideSaveThisSearchElement, 15);
+  }
+}
+
+SDM.search.canManageSavedQueries = function(){
+                
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+	  // code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{
+	  // code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  {
+				   var userCanManageSavedQueries = xmlhttp.responseText;
+				   if('false' == userCanManageSavedQueries.trim()){
+				   SDM.search.disableActionsForUser();
+				   }
+	  }
+	}
+	xmlhttp.open("GET","netmarkets/jsp/sdm/search/userCanManageSavedQueries.jsp",true);
+	xmlhttp.send();
+}
+
+PTC.navigation.on("afterLoadContent", SDM.search.controlSavedQueryAccess);

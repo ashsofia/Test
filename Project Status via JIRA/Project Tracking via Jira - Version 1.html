@@ -1,0 +1,158 @@
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+#chartdivResources {
+	width	: 100%;
+	height	: 500px;
+}	
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/gantt.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/none.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/black.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
+
+<!-- Chart code -->
+
+<script type="text/javascript" src="http://10.219.20.237:8080/Profiles/vgandhi/Desktop/test/amChartGanttChart.js"></script>
+<script type="text/javascript" src="http://10.219.20.237:8080/Profiles/vgandhi/Desktop/test/amChartTaskPerResource.js"></script>
+
+
+<script>
+var themeType="light";
+amGanttChart(themeType);
+
+amTaskPerResourceChart(themeType);
+ 
+ function changeBgColor(graphType,theme) {
+	 
+	 var firstGraph;
+	 if(graphType=="Gantt") {
+		firstGraph = document.getElementById('chartdiv');
+		amGanttChart(theme);
+	 }
+	 else if(graphType=="Column") {
+		firstGraph = document.getElementById('chartdivResources');
+		amTaskPerResourceChart(theme);	
+	 }
+	 if(theme=="none") {
+		 firstGraph.style.backgroundColor = "#FDFEFE";
+		 firstGraph.style.color = "#17202A";
+	 }
+	 else if(theme=="light") {
+		 firstGraph.style.backgroundColor = "#F0F3F4";
+		 firstGraph.style.color = "#17202A";
+	 }
+	 else if(theme=="dark") {
+		 firstGraph.style.backgroundColor = "#30303d";
+		 firstGraph.style.color = "#FFFFFF";
+	 }
+	else if(theme=="chalk") {
+		 firstGraph.style.backgroundColor = "#3f3e3b";
+		 firstGraph.style.color = "#FFFFFF";
+	 }
+	else if(theme=="black") {
+		 firstGraph.style.backgroundColor = "#3f3e3b";
+		 firstGraph.style.color = "#FFFFFF";
+	 }	 
+	else if(theme=="patterns") {
+		 firstGraph.style.backgroundColor = "#FDFEFE";
+		 firstGraph.style.color = "#17202A";
+	 }
+ }
+</script>
+
+<!-- HTML -->
+
+<html>
+
+<head>
+  <title>Project Tracking via JIRA</title>
+  <meta charset="UTF-8">
+</head>
+
+<body bgcolor="white">
+<center>
+<h1 style="color:blue;">Project Tracking via JIRA</h1>
+</center>
+
+<div class="dropdown">
+		  <button class="dropbtn">Select a theme</button>
+		  <div class="dropdown-content">
+				<a href="#" onclick="changeBgColor('Gantt','none')">No theme</a>
+				<a href="#" onclick="changeBgColor('Gantt','light')">Light theme</a>
+				<a href="#" onclick="changeBgColor('Gantt','dark')">Dark theme</a>
+				<a href="#" onclick="changeBgColor('Gantt','black')">Black theme</a>
+				<a href="#" onclick="changeBgColor('Gantt','chalk')">Chalk theme</a>
+				<a href="#" onclick="changeBgColor('Gantt','patterns')">Pattern theme</a>
+		  </div>
+</div>
+</body>
+<div id="chartdiv"></div>
+<div class="dropdown">
+		<button class="dropbtn">Select a theme</button>
+		<div class="dropdown-content">
+			<a href="#" onclick="changeBgColor('Column','none')">No theme</a>
+			<a href="#" onclick="changeBgColor('Column','light')">Light theme</a>
+			<a href="#" onclick="changeBgColor('Column','dark')">Dark theme</a>
+			<a href="#" onclick="changeBgColor('Column','black')">Black theme</a>
+			<a href="#" onclick="changeBgColor('Column','chalk')">Chalk theme</a>
+			<a href="#" onclick="changeBgColor('Column','patterns')">Pattern theme</a>
+		</div>
+	</div>
+<div id="chartdivResources"></div>
+
+</html>
