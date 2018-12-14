@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PLM-LHT" default="compile" basedir="..">
     
+	
     <target name="init">
+		<path id="deploy.classpath">
+			<fileset dir="jar"  erroronmissingdir="true">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>	
        <mkdir dir="SonarQube/classes" />
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes" />
+        <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes">
+			<classpath refid="deploy.classpath" />
+		</javac>
     </target>
     
  
