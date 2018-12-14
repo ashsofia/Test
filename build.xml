@@ -4,7 +4,7 @@
 	
     <target name="init">
 		<path id="deploy.classpath">
-			<fileset dir="http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/local-demo/"  erroronmissingdir="true">
+			<fileset dir="ashi/local-demo/"  erroronmissingdir="true">
 				<include name="**/*.jar"/>
 			</fileset>
 		</path>	
