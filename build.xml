@@ -6,7 +6,7 @@
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="SonarQube/src" destdir="SonarQube/classes" />
+        <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes" />
     </target>
     
  
