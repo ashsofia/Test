@@ -6,9 +6,12 @@
 	    	<mkdir dir="SonarQube/classes" /> 
     </target>
 	
-	<target name="retrieve" description="retrieve">
+    <target name="retrieve" description="retrieve">
       <ivy:settings /> <!-- needed so that ivysettings.xml is used-->
-      <ivy:retrieve organisation="lib" module="*.jar" inline="true" pattern="*.jar"/> 
+      <url name="art-url">
+      		<artifact pattern="http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/local-demo/[module]/[module].[ext]"/>
+      </url>
+      <ivy:retrieve organisation="art-url" module="art-url" inline="true" pattern="*.jar"/> 
     </target>
 	
 	
