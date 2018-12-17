@@ -1,5 +1,11 @@
 <ivysettings>
+       <credentials host="localhost" realm="Artifactory Realm" username="admin" passwd="admin"/>
         <resolvers>
-          <ibiblio name="artifactory" m2compatible="true" root="http://localhost:8080/artifactory/local-demo"/>
+                
+          <url name="artifactory-publish">
+        <!-- You can use  m2compatible="true" instead of specifying your own pattern -->
+        <artifact pattern="http://localhost:8081/artifactory/local-demo/lib/[artifact].jar"/>
+         </url>
         </resolvers>
+        
 </ivysettings>
