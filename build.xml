@@ -4,11 +4,18 @@
 	
     <target name="init">
 		<path id="deploy.classpath">
-			<fileset dir="ashi/local-demo/"  erroronmissingdir="true">
+				
+	    	<remoteRepository url="http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/local-demo">
+
+                          <authentication username="admin" password="admin" />
+                </remoteRepository> 
+			
+			<fileset dir="local-demo/"  erroronmissingdir="true">
 				<include name="**/*.jar"/>
 			</fileset>
 		</path>	
-       <mkdir dir="SonarQube/classes" />
+       		
+	    	<mkdir dir="SonarQube/classes" /> 
     </target>
 
     <target name="compile" depends="init">
