@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="PLM-LHT" default="compile" basedir="..">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="PLM-LHT" default="compile" basedir="..">
     
 	
     <target name="init">
-	    
-	    <path id="deploy.classpath">
-			<fileset dir="http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/local-demo"  erroronmissingdir="true">
-				<include name="*.jar"/>
-			</fileset>
-		</path>	
-       		
 	    	<mkdir dir="SonarQube/classes" /> 
     </target>
-
-    <target name="compile" depends="init">
+	
+	<target name="retrieve" description="retrieve">
+      <ivy:settings /> <!-- needed so that ivysettings.xml is used-->
+      <ivy:retrieve inline="true" pattern="*.jar"/> 
+    </target>
+	
+	
+    <target name="compile" depends="init,retrieve">
         <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes">
-			<classpath refid="deploy.classpath" />
 		</javac>
     </target>
     
