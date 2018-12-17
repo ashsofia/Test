@@ -3,10 +3,6 @@
     
 	
     <target name="init">
-		<remoteRepository url="http://localhost:8081/artifactory/webapp/#/artifacts/browse/tree/General/local-demo">
-
-                          <authentication username="admin" password="admin" />
-                </remoteRepository> 
 	    
 	    <path id="deploy.classpath">
 			<fileset dir="local-demo/"  erroronmissingdir="true">
