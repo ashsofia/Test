@@ -14,7 +14,7 @@
 	
 	
     <target name="compile" depends="init">
-	<get src="http://localhost:8081/artifactory/local-demo/lib/*.jar" dest="SonarQube/lib"/>
+	<get src="http://localhost:8081/artifactory/local-demo/lib/" dest="SonarQube/lib"/>
         <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes">
 		</javac>
     </target>
