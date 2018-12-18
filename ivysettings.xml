@@ -6,6 +6,7 @@
                 
           <url name="artifactory-publish">
                 <!-- You can use  m2compatible="true" instead of specifying your own pattern -->
+                <ivy pattern="http://localhost:8081/artifactory/local-demo/lib/ivy*.xml"/>
                 <artifact pattern="http://localhost:8081/artifactory/local-demo/lib/[artifact].jar"/>
          </url>
         </resolvers>
