@@ -9,9 +9,9 @@
     <target name="retrieve" description="retrieve">
       <ivy:settings /> <!-- needed so that ivysettings.xml is used-->
       <url name="art-url">
-      http://localhost:8081/artifactory/local-demo/[module]/[artifact].[ext]
+      http://localhost:8081/artifactory/local-demo
       </url>
-      <ivy:retrieve organisation="art-url" module="art-url" inline="true" pattern="*.jar"/> 
+      <ivy:retrieve organisation="art-url" module="lib" inline="true" pattern="*.jar"/> 
     </target>
 	
 	
