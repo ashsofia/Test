@@ -8,7 +8,7 @@
     </target>
 	
     <target name="retrieve" description="retrieve">
-      <ivy:settings /> <!-- needed so that ivysettings.xml is used-->
+    <!-- needed so that ivysettings.xml is used-->
       <ivy:retrieve organisation="local-demo" module="lib" inline="true" pattern="*.jar"/> 
     </target>
 	
