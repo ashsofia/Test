@@ -9,8 +9,7 @@
 	
     <target name="retrieve" description="retrieve">
       <ivy:settings /> <!-- needed so that ivysettings.xml is used-->
-      <url>http://localhost:8081/artifactory/local-demo</url>
-      <ivy:retrieve organisation="art-url" module="lib" inline="true" pattern="*.jar"/> 
+      <ivy:retrieve organisation="local-demo" module="lib" inline="true" pattern="*.jar"/> 
     </target>
 	
 	
