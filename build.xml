@@ -4,6 +4,7 @@
 	
     <target name="init">
 	    	<mkdir dir="SonarQube/classes" /> 
+	    	<mkdir dir="SonarQube/lib" /> 
     </target>
 	
     <target name="retrieve" description="retrieve">
@@ -14,6 +15,7 @@
 	
 	
     <target name="compile" depends="init,retrieve">
+	<get src="http://localhost:8081/artifactory/local-demo/lib/" dest="SonarQube/lib"/>
         <javac srcdir="SonarQube/Project Status via JIRA/src/" destdir="SonarQube/classes">
 		</javac>
     </target>
